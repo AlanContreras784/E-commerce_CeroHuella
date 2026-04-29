@@ -10,7 +10,7 @@ export function ProductosProvider({ children }) {
     const [productoSeleccionado, setProductoSeleccionado] = useState(null);
     const [productosBuscados, setProductosBuscados] = useState([]);
 
-    const API_URL = "https://e-commerce-cero-huella.vercel.app//api/products";
+    const API_URL = "https://e-commerce-cero-huella.vercel.app/api/products";
 
     // ------------------- OBTENER TODOS LOS PRODUCTOS ------------------------------
     async function obtenerProductos() {
