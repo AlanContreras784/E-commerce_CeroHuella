@@ -10,8 +10,8 @@ export function ProductosProvider({ children }) {
     const [productoSeleccionado, setProductoSeleccionado] = useState(null);
     const [productosBuscados, setProductosBuscados] = useState([]);
 
-    const API_URL = "https://node-entrega-final-back-end.vercel.app/api/products";
-
+    const //API_URL = "https://node-entrega-final-back-end.vercel.app/api/products";
+    const API_URL = "https://api-productos-usuarios-node.vercel.app/api/products";
     // ------------------- OBTENER TODOS LOS PRODUCTOS ------------------------------
     async function obtenerProductos() {
         try {
