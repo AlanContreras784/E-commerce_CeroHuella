@@ -2,10 +2,17 @@ import { Container, Image, Row } from "react-bootstrap";
 import video from "../assets/video/ROCK&VIDARECICLA.mp4"
 export default function About() {
   return (
-    <Container fluid className="bg-gradiente">
+    <Container fluid className="">
       <Row className="">
         <div className="col-md-9 clearfix container-fluid">
-          <h1 className="py-5 text-center" >Sobre Nosotros</h1>
+          <h1 className="py-3 text-center" >Sobre Nosotros</h1>
+          <div className=" col-12 col-md-11 col-lg-9  bg-gradiente py-3 mx-auto my-3">
+            <video className="w-100 my-2"
+            src={video}
+            poster="https://i.postimg.cc/gJsdWRfx/R&V_Logo_Verde_1024(2).png"
+            controls
+          ></video>
+          </div>
           <Image
             src="https://i.postimg.cc/26YXphyP/imagennosotros.jpg"
             className="col-md-4 float-md-end mb-4 ms-md-5 d-none d-md-block"
@@ -38,13 +45,6 @@ export default function About() {
             Valoramos la colaboración y la participación activa, creando un
             espacio donde todos puedan compartir ideas y experiencias.
           </p>
-          <div className=" col-12 col-md-11 col-lg-9  bg-gradiente p-3 mx-auto">
-            <video className="w-100 my-3"
-            src={video}
-            poster="https://i.postimg.cc/gJsdWRfx/R&V_Logo_Verde_1024(2).png"
-            controls
-          ></video>
-          </div>
           
           <h2 className="p-3 pt-5">Lo Que Hacemos</h2>
           <p className="p-3">
