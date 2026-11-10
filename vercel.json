@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/compartir/:id",
+      "destination": "/api/compartir?id=:id"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }

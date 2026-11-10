@@ -4,7 +4,10 @@ import { descuentoDe, esOferta, precioFinal } from "../utils/precios";
 // WHATSAPP_NUMERO: código de país + código de área + número, solo dígitos,
 // sin "+", espacios, guiones ni el "0" / "15".
 // Ejemplo Argentina (celular de Buenos Aires): 54 9 11 2345 6789 -> "5491123456789"
-export const WHATSAPP_NUMERO = "5491167049288";
+export const WHATSAPP_NUMERO = "5491100000000";
+
+// Dirección pública de la tienda (se usa para armar el link que se comparte)
+export const SITIO_URL = "https://e-commerce-cero-huella.vercel.app";
 
 // Mensaje que aparece escrito de antemano en el chat (botón flotante)
 export const WHATSAPP_MENSAJE = "Hola! Quisiera hacer una consulta sobre sus productos.";
@@ -28,10 +31,8 @@ export const mensajeConsultaProducto = (producto) => {
     lineas.push(`Precio: $ ${producto.price}`);
   }
 
-  // WhatsApp no permite adjuntar archivos desde un link: se manda la URL de la imagen
-  if (typeof producto.imagen === "string" && producto.imagen.startsWith("http")) {
-    lineas.push(`Imagen: ${producto.imagen}`);
-  }
+  // Link que WhatsApp convierte en tarjeta con nombre, precio y foto del producto
+  lineas.push(`Ver producto: ${SITIO_URL}/compartir/${encodeURIComponent(producto.id)}`);
 
   return lineas.join("\n");
 };
