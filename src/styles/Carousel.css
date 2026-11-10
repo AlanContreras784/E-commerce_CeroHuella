@@ -76,3 +76,49 @@
 .bottom-10{
   bottom: 10%;
 }
+
+/* ---------- Celulares chicos (Moto E y similares) ----------
+   El texto de cada slide es más alto que la imagen y se cortaba arriba.
+   Se agranda la altura mínima y se reduce el tamaño del texto. */
+@media screen and (max-width: 767px) {
+  .carousel-item > img {
+    min-height: 30rem;
+  }
+
+  .carousel-caption,
+  .carousel-caption.bottom-10 {
+    left: 5%;
+    right: 5%;
+    bottom: 3rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .carousel-caption h1 {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .carousel-caption h3 {
+    font-size: 1.15rem;
+  }
+
+  .carousel-caption p {
+    font-size: 0.9rem;
+  }
+
+  .carousel-caption .logoRockVerde {
+    width: 5rem !important;
+    height: auto;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .carousel-caption .divBlur p {
+    padding: 0.5rem !important;
+    margin-bottom: 0.5rem;
+  }
+
+  .carousel-caption .divBlur {
+    padding-bottom: 0.75rem !important;
+  }
+}
