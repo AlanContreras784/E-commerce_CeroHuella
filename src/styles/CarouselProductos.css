@@ -24,7 +24,7 @@
 .carousel-productos .producto-image {
   width: 250px;
   height: 300px;
-  object-fit: cover;
+  object-fit: fill;
   filter: none;
 }
 
@@ -47,34 +47,4 @@
   .carousel-productos {
     padding: 0 2.5rem;
   }
-}
-
-.seccion-productos {
-  padding: 2.5rem 0 1rem;
-}
-
-.seccion-productos__titulo {
-  color: #283618;
-  font-style: italic;
-  font-size: 1.6rem;
-  text-align: center;
-  margin-bottom: 1rem;
-}
-
-/* Deja lugar a los lados para las flechas */
-.carousel-productos {
-  padding: 0 3.5rem;
-}
-
-/* Pisa los estilos del carrusel de portada (70vh, imagen oscurecida) */
-.carousel-productos .carousel-item {
-  height: auto;
-  padding: 1rem 0 3rem;
-}
-
-.carousel-productos .producto-image {
-  width: 250px;
-  height: 300px;
-  object-fit: fill;
-  filter: none;
 }
