@@ -28,7 +28,7 @@ function Home() {
                 <CarouselInicio />
             </section>
             <CarouselProductos titulo="PRODUCTOS DESTACADOS" productos={destacados} />
-            <CarouselProductos titulo="OFERTAS" productos={ofertas} />
+            <CarouselProductos titulo="PROMOCIONES NO TE LO PIERDAS" productos={ofertas} />
         </div>
     );
 }

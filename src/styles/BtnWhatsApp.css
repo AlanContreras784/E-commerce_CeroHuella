@@ -1,0 +1,22 @@
+/* Botón de WhatsApp: verde sólido, y al pasar el mouse queda "outline"
+   (fondo transparente, borde y texto verdes), al revés que los botones outline. */
+.btn-whatsapp {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #25d366;
+  --bs-btn-border-color: #25d366;
+  --bs-btn-hover-color: #25d366;
+  --bs-btn-hover-bg: transparent;
+  --bs-btn-hover-border-color: #25d366;
+  --bs-btn-active-color: #25d366;
+  --bs-btn-active-bg: transparent;
+  --bs-btn-active-border-color: #25d366;
+  --bs-btn-focus-shadow-rgb: 37, 211, 102;
+}
+
+/* Versión solo ícono (cards de productos) */
+.btn-whatsapp-icono {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+}

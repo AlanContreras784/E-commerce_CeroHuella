@@ -18,6 +18,8 @@ function Header() {
     const [busqueda,setBusqueda]=useState('');
     const {filtrarProductos}=useProductosContext();
     const location = useLocation();
+    // Controla si el menú desplegable (offcanvas) está abierto, para poder cerrarlo desde la lupa
+    const [menuAbierto, setMenuAbierto] = useState(false);
 
     function obtenerUsername(token){
         const email = token.replace('fake-token-', '');
@@ -46,7 +48,7 @@ function Header() {
 
     return (
         <header className="header ">
-            <Navbar collapseOnSelect expand='lg' className="fs-6 py-1" variant="dark">
+            <Navbar collapseOnSelect expand='lg' expanded={menuAbierto} onToggle={setMenuAbierto} className="fs-6 py-1" variant="dark">
                 <Container className="mt-1 mb-1" fluid>
                     <Navbar.Brand as={Link} to={'/'} href="#"><img className="logo  me-auto" src={Logo} alt="" /></Navbar.Brand>
                     <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-lg`} />
@@ -64,7 +66,7 @@ function Header() {
                         </Offcanvas.Header>
                         <Offcanvas.Body>
                             <Nav variant="underline"  className="justify-content-around  flex-grow-1 ">
-                            <InputGroup className="d-flex  align-items-center me-auto border-boton  ">
+                                <InputGroup className="d-flex  align-items-center me-auto border-boton  ">
                                 <Form.Control
                                 placeholder="Buscar productos"
                                 type="search"
@@ -77,8 +79,14 @@ function Header() {
                                     setBusqueda(valor);
                                     filtrarProductos(valor);
                                     }}
+                                onKeyDown={(e) => {
+                                    if (e.key === "Enter") {
+                                        filtrarProductos(busqueda);
+                                        setMenuAbierto(false);
+                                    }
+                                }}
                                 />
-                                <Button variant="" className=" px-3 "  id="button-addon2" onClick={() => filtrarProductos(busqueda)}>
+                                <Button variant="" className=" px-3 "  id="button-addon2" onClick={() => { filtrarProductos(busqueda); setMenuAbierto(false); }} aria-label="Buscar">
                                 <i className="fa-solid fa-magnifying-glass fa-lg" style={{color: '#ffffff'}}></i>
                                 </Button>
                             </InputGroup>
@@ -94,6 +102,7 @@ function Header() {
                             </NavDropdown> 
                             <Nav.Link href="#" eventKey={'/contacto'} as={Link} to={'/contacto'} className='nav-link me-auto'>Contacto</Nav.Link>
                             {admin ? <Nav.Link href="#" as={Link} to={'/admin/agregarProductos'} className='nav-link me-auto'>Agregar Productos</Nav.Link> : <></>}
+                            
                             {admin ? <Nav.Link href="#" eventKey={'/admin/usuarios'} as={Link} to={'/admin/usuarios'} className='nav-link me-auto'>Usuarios</Nav.Link> : <></> }
                             {/* <Nav.Link href="#" eventKey={'/carrito'} as={Link} to={'/carrito'} aria-label="carrito de compras" className='mx-1 mt-2 nav-link position-relative me-auto'><i className= " fa-solid fa-cart-shopping fa-lg"><Badge pill bg="danger"  className="position-absolute  me-5 translate-middle badge-small">{productosCarrito.length>0 ? productosCarrito.length : ""}</Badge></i></Nav.Link> */}
                             <Nav.Link href="#" eventKey={'/login'} as={Link} to={'/login'} className='mx-0 ms-0 nav-link me-auto'><Button size="md" variant="outline-light" className="border-0 ps-0" onClick={ !user ? handleNavigateLogin : handleLogout}>{ !user ? <i className="fa-solid fa-user fa-xl" style={{color:"#ffffff"}}></i> : <span size="md" variant="outline-light" className="border-boton p-1"><CiLogout /> : {obtenerUsername(user)}</span>}</Button></Nav.Link>

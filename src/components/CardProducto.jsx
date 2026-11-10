@@ -1,5 +1,6 @@
 import { Card, Button } from "react-bootstrap";
 import "../styles/Productos.css";
+import "../styles/BtnWhatsApp.css";
 import { Link } from "react-router-dom";
 import { FaWhatsapp } from "react-icons/fa";
 import { descuentoDe, esDestacado, esOferta, precioFinal } from "../utils/precios";
@@ -35,8 +36,8 @@ function CardProducto({ producto }) {
                     </Link>
                     <Button
                         as="a"
-                        variant="success"
-                        className="boton-whatsapp-card"
+                        variant=""
+                        className="btn-whatsapp btn-whatsapp-icono"
                         href={urlWhatsApp(mensajeConsultaProducto(producto))}
                         target="_blank"
                         rel="noopener noreferrer"
