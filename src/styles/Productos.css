@@ -33,6 +33,7 @@
 .producto-image{
     width: 250px;
     height: 300px;
+    contain: cover;
     border: 1px solid #7cb744fa;
 }
 

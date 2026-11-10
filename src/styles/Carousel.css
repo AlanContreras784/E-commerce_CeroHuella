@@ -1,6 +1,5 @@
 .carousel-item{
-    height: 70vh;
-    
+    height: auto;
   }
   
   .carousel-item img{
@@ -8,6 +7,21 @@
     width: 100%;
     object-fit: cover;
     filter: brightness(0.5);
+  }
+
+  /* Imagen de cada slide (hija directa): la altura sale de la proporción 2:1,
+     así la imagen de portada se ve completa en pantallas anchas */
+  .carousel-item > img{
+    height: auto;
+    aspect-ratio: 2 / 1;
+    min-height: 70vh;
+    max-height: 90vh;
+  }
+
+  @media screen and (min-width: 768px) {
+    .carousel-item > img{
+      min-height: 0;
+    }
   }
   
   .carousel-caption {
