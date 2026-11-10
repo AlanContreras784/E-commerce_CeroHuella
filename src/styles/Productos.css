@@ -6,8 +6,8 @@
     background-color: #d3d1d1;
 }
 
-
 .producto-card{
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -34,4 +34,68 @@
     width: 250px;
     height: 300px;
     border: 1px solid #7cb744fa;
+}
+
+/* ---------- Etiquetas y precios de oferta ---------- */
+.badge-oferta,
+.badge-destacado{
+    position: absolute;
+    top: 0.75rem;
+    z-index: 2;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.badge-oferta{
+    left: 0.75rem;
+    background-color: #c1121f;
+}
+
+.badge-destacado{
+    right: 0.75rem;
+    background-color: #d8492e;
+}
+
+.precio-original{
+    text-decoration: line-through;
+    opacity: 0.6;
+    margin-right: 0.25rem;
+}
+
+.precio-oferta{
+    color: #c1121f;
+    font-weight: 700;
+}
+
+/* ---------- Botones de la card (ver detalles + WhatsApp) ---------- */
+.producto-acciones {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.producto-acciones button,
+.producto-acciones .boton-whatsapp-card {
+    margin-bottom: 0;
+}
+
+.boton-whatsapp-card {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    background-color: #25d366;
+    border-color: #25d366;
+    color: #fff;
+}
+
+.boton-whatsapp-card:hover {
+    background-color: #1ebe5a;
+    border-color: #1ebe5a;
+    color: #fff;
 }

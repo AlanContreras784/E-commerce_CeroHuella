@@ -10,6 +10,7 @@ import { useProductosContext } from "../contexts/ProductosContext";
 import { ToastContainer, toast } from "react-toastify";
 import { FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
 import { MdOutlineAddShoppingCart } from "react-icons/md";
+import { descuentoDe, esOferta, precioFinal } from "../utils/precios";
 
 function ProductoDetalle() {
   const { agregarAlCarrito } = useContext(CarritoContext);
@@ -58,7 +59,7 @@ function ProductoDetalle() {
   // Funciones carrito
   function funcionCarrito() {
     if (cantidad < 1) return;
-    agregarAlCarrito({ ...productoSeleccionado, cantidad });
+    agregarAlCarrito({ ...productoSeleccionado, price: precioFinal(productoSeleccionado), cantidad });
     dispararSweetAlertBasico("Producto Agregado", "El producto fue agregado al carrito con éxito", "success", "Cerrar");
     toast.success('Agregado al carrito con éxito');
   }
@@ -82,7 +83,15 @@ function ProductoDetalle() {
         <div className="detalle-info">
           <h1 className="fs-2">{productoSeleccionado.name}</h1>
           <p>{productoSeleccionado.description}</p>
-          <h6>$ {productoSeleccionado.price}</h6>
+          {esOferta(productoSeleccionado) ? (
+            <h6>
+              <span className="precio-original">$ {productoSeleccionado.price}</span>{" "}
+              <span className="precio-oferta">$ {precioFinal(productoSeleccionado)}</span>{" "}
+              <span className="badge bg-danger">-{descuentoDe(productoSeleccionado)}%</span>
+            </h6>
+          ) : (
+            <h6>$ {productoSeleccionado.price}</h6>
+          )}
 
           {admin ? (
             <div className="d-flex justify-content-center align-items-center">

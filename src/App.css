@@ -32,20 +32,15 @@
 
 /*-----------BACKGROUND GRADIENTE-------*/
 
-.bg-gradiente{
+.bg-gradiente {
   background: radial-gradient(
     circle,
-    #7cb744,
-    #41bc73,
-    #00bd9f,
-    #00bbc2,
-    #00b5d6,
-    #3bbad7,
-    #56bfd8,
-    #6bc4d9,
-    #90d4d4,
-    #b6e1d4,
-    #daeede,
-    #f7fbf2
-  );;
+    rgba(124, 183, 68, 0.88),  /* #7CB744E0 - Tu base exacta */
+    rgba(147, 198, 89, 0.85),  /* Verde manzana claro */
+    rgba(169, 213, 112, 0.80), /* Verde lima suave */
+    rgba(192, 227, 136, 0.70), /* Verde pastel */
+    rgba(214, 241, 161, 0.60), /* Verde pálido */
+    rgba(235, 249, 188, 0.40), /* Crema translúcido */
+    rgba(247, 253, 240, 0.20)  /* Blanco ecológico casi transparente */
+  );
 }

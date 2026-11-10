@@ -4,6 +4,7 @@ import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { dispararSweetAlertBasico } from "../assets/SweetAlert";
 import { useAuthContext } from "../contexts/AuthContext";
+import { CATEGORIAS } from "../utils/categorias";
 
 function FormularioEdicion() {
   const { admin } = useAuthContext();
@@ -42,8 +43,8 @@ function FormularioEdicion() {
   };
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setProducto({ ...producto, [name]: value });
+    const { name, value, type, checked } = e.target;
+    setProducto({ ...producto, [name]: type === "checkbox" ? checked : value });
   };
 
   const handleSubmit = async (e) => {
@@ -116,13 +117,45 @@ function FormularioEdicion() {
 
             <Form.Group className="mb-3 text-start">
               <FloatingLabel label="Categoria">
-                <Form.Control
-                  type="text"
+                <Form.Select
                   name="category"
-                  value={producto.category}
+                  value={(producto.category || "").toLowerCase()}
+                  onChange={handleChange}
+                >
+                  <option value="">Seleccioná una categoría</option>
+                  {CATEGORIAS.map((c) => (
+                    <option key={c.value} value={c.value}>{c.label}</option>
+                  ))}
+                  {producto.category &&
+                    !CATEGORIAS.some((c) => c.value === producto.category.toLowerCase()) && (
+                      <option value={producto.category.toLowerCase()}>{producto.category}</option>
+                    )}
+                </Form.Select>
+              </FloatingLabel>
+            </Form.Group>
+
+            <Form.Group className="mb-3 text-start">
+              <FloatingLabel label="Descuento (%)">
+                <Form.Control
+                  type="number"
+                  min="0"
+                  max="99"
+                  name="descuento"
+                  value={producto.descuento ?? 0}
                   onChange={handleChange}
                 />
               </FloatingLabel>
+            </Form.Group>
+
+            <Form.Group className="mb-3 text-start">
+              <Form.Check
+                type="switch"
+                id="destacado"
+                name="destacado"
+                label="Producto destacado"
+                checked={!!producto.destacado}
+                onChange={handleChange}
+              />
             </Form.Group>
 
             <Form.Group className="mb-3 text-start">

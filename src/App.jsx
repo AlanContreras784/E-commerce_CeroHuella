@@ -25,6 +25,7 @@ import FormularioEdicionUsuario from "./components/FormularioEdicionUsuario";
 import Reutilizables from "./components/Reutilizables";
 import Biodegradables from "./components/Biodegradables";
 import BolsasYLamparas from "./components/BolsasYLamparas";
+import BotonWhatsApp from "./components/BotonWhatsApp";
 
 function App() {
   const { verificacionLog } = useAuthContext();
@@ -69,6 +70,7 @@ function App() {
       </Routes>
 
       <Footer />
+      <BotonWhatsApp />
     </Router>
   );
 }

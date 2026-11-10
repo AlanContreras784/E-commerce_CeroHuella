@@ -4,6 +4,7 @@ import { Navigate } from 'react-router-dom';
 import { dispararSweetAlertBasico } from '../assets/SweetAlert';
 import { Alert, Button, Card, Container, FloatingLabel, Form } from 'react-bootstrap';
 import { useProductosContext } from '../contexts/ProductosContext';
+import { CATEGORIAS } from "../utils/categorias";
 
 function FormularioProducto() {
 
@@ -17,6 +18,8 @@ function FormularioProducto() {
         description: '',
         imagen: "",
         category:"",
+        destacado: false,
+        descuento: 0,
     });
 
     const validarFormulario = () => {
@@ -38,8 +41,8 @@ function FormularioProducto() {
     }
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setProducto({ ...producto, [name]: value });
+        const { name, value, type, checked } = e.target;
+        setProducto({ ...producto, [name]: type === "checkbox" ? checked : value });
     };
 
     const handleSubmit2 = async (e) => {
@@ -48,7 +51,7 @@ function FormularioProducto() {
     if (validarForm === true) {
         try {
             await agregarProducto(producto);
-            setProducto({ name: '', price: '', description: '', imagen: "", category:""});
+            setProducto({ name: '', price: '', description: '', imagen: "", category:"", destacado: false, descuento: 0});
             setError('');
             dispararSweetAlertBasico("Producto Agregado", "El producto fue agregado con éxito", "success", "Cerrar");
         } catch (error) {
@@ -90,8 +93,21 @@ function FormularioProducto() {
                     </Form.Group>
                     <Form.Group className="mb-3 text-start">
                         <FloatingLabel controlId="floatingInput" label="Categoria" className="mb-4">
-                        <Form.Control type="text"  name="category" placeholder='categoria' value={producto.category} onChange={handleChange} ></Form.Control>
+                        <Form.Select name="category" value={producto.category} onChange={handleChange} required>
+                            <option value="">Seleccioná una categoría</option>
+                            {CATEGORIAS.map((c) => (
+                                <option key={c.value} value={c.value}>{c.label}</option>
+                            ))}
+                        </Form.Select>
                         </FloatingLabel>
+                    </Form.Group>
+                    <Form.Group className="mb-3 text-start">
+                        <FloatingLabel controlId="floatingInput" label="Descuento (%)" className="mb-4">
+                        <Form.Control type="number" name="descuento" placeholder='descuento' value={producto.descuento} onChange={handleChange} min="0" max="99"></Form.Control>
+                        </FloatingLabel>
+                    </Form.Group>
+                    <Form.Group className="mb-3 text-start">
+                        <Form.Check type="switch" id="destacado" name="destacado" label="Producto destacado" checked={!!producto.destacado} onChange={handleChange} />
                     </Form.Group>
                     <Form.Group className="mb-3 text-start">
                         <FloatingLabel controlId="floatingInput" label='Descripcion' className="mb-4">
