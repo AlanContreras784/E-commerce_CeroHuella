@@ -1,5 +1,18 @@
 import { Container, Image, Row } from "react-bootstrap";
 import video from "../assets/video/ROCK&VIDARECICLA.mp4"
+
+// Foto que se muestra solo en celular (menos de 768px), debajo de cada párrafo.
+// En pantallas más grandes las fotos siguen como antes (la de arriba a la derecha y la columna lateral).
+function FotoCelular({ src, alt }) {
+  return (
+    <div className="d-md-none col-10 mx-auto pb-3">
+      <div className="card" style={{ border: "1px solid #7cb744fa" }}>
+        <Image src={src} className="card-img-top" alt={alt} />
+      </div>
+    </div>
+  );
+}
+
 export default function About() {
   return (
     <Container fluid className="">
@@ -26,6 +39,7 @@ export default function About() {
             puede hacer la diferencia en la lucha contra el cambio climático y
             la contaminación, y estamos aquí para inspirarte a tomar acción.
           </p>
+          <FotoCelular src="https://i.postimg.cc/26YXphyP/imagennosotros.jpg" alt="Equipo de Cero Huella" />
 
           <h2 className="p-3">Nuestra Misión</h2>
           <p className="p-3">
@@ -36,6 +50,8 @@ export default function About() {
             Creemos que el reciclaje y el uso de productos que contaminen menos
             son pasos fundamentales hacia un futuro más limpio y saludable.
           </p>
+          <FotoCelular src="https://i.postimg.cc/XqRj3s5V/campa-a-De-Residuos.jpg" alt="Campaña de residuos" />
+
           <h2 className="p-3">Nuestros Valores</h2>
           <p className="p-3">
             Sostenibilidad: Fomentamos prácticas que minimizan el desperdicio y
@@ -45,6 +61,7 @@ export default function About() {
             Valoramos la colaboración y la participación activa, creando un
             espacio donde todos puedan compartir ideas y experiencias.
           </p>
+          <FotoCelular src="https://i.postimg.cc/W481rmBn/bolsas-De-Dormir.jpg" alt="Bolsas de dormir" />
           
           <h2 className="p-3 pt-5">Lo Que Hacemos</h2>
           <p className="p-3">
@@ -56,9 +73,12 @@ export default function About() {
             cuidadosamente seleccionados para alinearse con nuestros
             principios de sostenibilidad.
           </p>
+          <FotoCelular src="https://i.postimg.cc/GmJLwJmC/mes-Del-Reciclaje.jpgz" alt="Mes del reciclaje" />
+
           <h2 className="p-3">Únete a Nosotros</h2>
         </div>
-        <aside className=" col-sm-12 col-lg-3 pb-3 ">
+        {/* Columna lateral: solo en tablet y pantallas grandes (en celular las fotos van debajo de cada párrafo) */}
+        <aside className="d-none d-md-block col-sm-12 col-lg-3 pb-3 ">
           <div className="row row-cols-1 row-cols-md-2 row-cols-lg-1 g-4 justify-content-center align-items-center">
             <div className="col-10 col-lg-12 col-md-6 ">
               <div className="card">
@@ -70,14 +90,14 @@ export default function About() {
                 <Image src="https://i.postimg.cc/W481rmBn/bolsas-De-Dormir.jpg" className="card-img-top " alt="..."/>
               </div>
             </div>
-            <div className="col-10 col-md-6 col-lg-12">
+            {/* <div className="col-10 col-md-6 col-lg-12">
               <div className="card">
                 <Image src="https://i.postimg.cc/cHD6q7TH/amemos-sin-juzgar.jpg" className="card-img-top" alt="..."/>
               </div>
-            </div>
+            </div> */}
             <div className="col-10 col-md-6 col-lg-12">
               <div className="card">
-                <Image src="https://i.postimg.cc/GmJLwJmC/mes-Del-Reciclaje.jpgz" className="card-img-top" alt="..."/>
+                <Image src="https://i.postimg.cc/GmJLwJmC/mes-Del-Reciclaje.jpg" className="card-img-top" alt="..."/>
               </div>
             </div>
           </div>

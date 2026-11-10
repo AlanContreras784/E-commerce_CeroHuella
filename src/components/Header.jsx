@@ -64,18 +64,6 @@ function Header() {
                         </Offcanvas.Header>
                         <Offcanvas.Body>
                             <Nav variant="underline"  className="justify-content-around  flex-grow-1 ">
-                            <Nav.Link href="#" eventKey={'/'} as={Link} to={'/'} className='nav-link me-auto'>Home</Nav.Link>
-                            {/* <Nav.Link href="#" eventKey={'/productos'} as={Link} to={'/productos'} className='nav-link'>Productos</Nav.Link> */}
-                            <Nav.Link href="#" eventKey={'/contacto'} as={Link} to={'/contacto'} className='nav-link me-auto'>Contacto</Nav.Link>
-                            <Nav.Link href="#" eventKey={'/about'} as={Link} to={'/about'} className='nav-link  me-auto'>Nosotros</Nav.Link>
-                            <NavDropdown title="Productos" id="nav-dropdown" className=" me-auto">
-                                <NavDropdown.Item  eventKey="/reutilizables" as={Link} to={'/reutilizables'}>Reutilizables</NavDropdown.Item>
-                                <NavDropdown.Item eventKey="/biodegradables" as={Link} to={'/biodegradables'}>Biodegradables</NavDropdown.Item>
-                                <NavDropdown.Item eventKey="/bolsasYlamparas" as={Link} to={'/bolsasYlamparas'}>Bolsas y Lamparas</NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item eventKey="/productos" as={Link} to={'/productos'}>Todos</NavDropdown.Item>
-                            </NavDropdown> 
-                            {admin ? <Nav.Link href="#" as={Link} to={'/admin/agregarProductos'} className='nav-link me-auto'>Agregar Productos</Nav.Link> : <></>}
                             <InputGroup className="d-flex  align-items-center me-auto border-boton  ">
                                 <Form.Control
                                 placeholder="Buscar productos"
@@ -94,8 +82,20 @@ function Header() {
                                 <i className="fa-solid fa-magnifying-glass fa-lg" style={{color: '#ffffff'}}></i>
                                 </Button>
                             </InputGroup>
+                            <Nav.Link href="#" eventKey={'/'} as={Link} to={'/'} className='nav-link me-auto'>Home</Nav.Link>
+                            {/* <Nav.Link href="#" eventKey={'/productos'} as={Link} to={'/productos'} className='nav-link'>Productos</Nav.Link> */}
+                            <Nav.Link href="#" eventKey={'/about'} as={Link} to={'/about'} className='nav-link  me-auto'>Nosotros</Nav.Link>
+                            <NavDropdown title="Productos" id="nav-dropdown" className=" me-auto">
+                                <NavDropdown.Item  eventKey="/reutilizables" as={Link} to={'/reutilizables'}>Reutilizables</NavDropdown.Item>
+                                <NavDropdown.Item eventKey="/biodegradables" as={Link} to={'/biodegradables'}>Biodegradables</NavDropdown.Item>
+                                <NavDropdown.Item eventKey="/bolsasYlamparas" as={Link} to={'/bolsasYlamparas'}>Bolsas y Lamparas</NavDropdown.Item>
+                                <NavDropdown.Divider />
+                                <NavDropdown.Item eventKey="/productos" as={Link} to={'/productos'}>Todos</NavDropdown.Item>
+                            </NavDropdown> 
+                            <Nav.Link href="#" eventKey={'/contacto'} as={Link} to={'/contacto'} className='nav-link me-auto'>Contacto</Nav.Link>
+                            {admin ? <Nav.Link href="#" as={Link} to={'/admin/agregarProductos'} className='nav-link me-auto'>Agregar Productos</Nav.Link> : <></>}
                             {admin ? <Nav.Link href="#" eventKey={'/admin/usuarios'} as={Link} to={'/admin/usuarios'} className='nav-link me-auto'>Usuarios</Nav.Link> : <></> }
-                            <Nav.Link href="#" eventKey={'/carrito'} as={Link} to={'/carrito'} aria-label="carrito de compras" className='mx-1 mt-2 nav-link position-relative me-auto'><i className= " fa-solid fa-cart-shopping fa-lg"><Badge pill bg="danger"  className="position-absolute  me-5 translate-middle badge-small">{productosCarrito.length>0 ? productosCarrito.length : ""}</Badge></i></Nav.Link>
+                            {/* <Nav.Link href="#" eventKey={'/carrito'} as={Link} to={'/carrito'} aria-label="carrito de compras" className='mx-1 mt-2 nav-link position-relative me-auto'><i className= " fa-solid fa-cart-shopping fa-lg"><Badge pill bg="danger"  className="position-absolute  me-5 translate-middle badge-small">{productosCarrito.length>0 ? productosCarrito.length : ""}</Badge></i></Nav.Link> */}
                             <Nav.Link href="#" eventKey={'/login'} as={Link} to={'/login'} className='mx-0 ms-0 nav-link me-auto'><Button size="md" variant="outline-light" className="border-0 ps-0" onClick={ !user ? handleNavigateLogin : handleLogout}>{ !user ? <i className="fa-solid fa-user fa-xl" style={{color:"#ffffff"}}></i> : <span size="md" variant="outline-light" className="border-boton p-1"><CiLogout /> : {obtenerUsername(user)}</span>}</Button></Nav.Link>
                             </Nav>
                         </Offcanvas.Body>
