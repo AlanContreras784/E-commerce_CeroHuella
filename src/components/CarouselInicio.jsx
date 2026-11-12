@@ -1,6 +1,6 @@
 import Carousel from 'react-bootstrap/Carousel';
 import imagen1 from '../assets/img/plantas_1920.jpg'
-import imagen2 from '../assets/img/carousel_02.jpg';
+import imagen2 from '../assets/img/equipo1.webp';
 import imagen3 from '../assets/img/carousel_03.jpg';
 import imagenRyV from '../assets/img/R&V Logo Verde 1024(2).png'
 import '../styles/Carousel.css'
@@ -31,10 +31,10 @@ function CarouselInicio() {
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
-        <img  src={imagen2}/>
+        <img alt='"Equipo de Cero Huella trabajando en una jornada' src={imagen2} className="w-100 h-90" style={{ backgroundSize: 'cover', backgroundPosition: 'top ', objectPosition: "50% 20%", backgroundPosition: "bottom",objectPosition: "50% 90%" }}/>
         <Carousel.Caption className=''>
-          <h3>Compra rápida desde tu móvil</h3>
-          <p>Accede a nuestras ofertas exclusivas y compra con un solo clic desde cualquier lugar, 24/7.</p>
+          <h3>Un equipo que se une por el ambiente</h3>
+          <p>Personas comprometidas que trabajan codo a codo para cuidar el planeta y a nuestra comunidad.</p>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>

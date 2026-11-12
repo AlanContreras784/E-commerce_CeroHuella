@@ -26,6 +26,7 @@ import Reutilizables from "./components/Reutilizables";
 import Biodegradables from "./components/Biodegradables";
 import BolsasYLamparas from "./components/BolsasYLamparas";
 import BotonWhatsApp from "./components/BotonWhatsApp";
+import Talleres from "./components/Talleres";
 
 function App() {
   const { verificacionLog } = useAuthContext();
@@ -36,41 +37,36 @@ function App() {
   }, [verificacionLog]);
 
   return (
-    <Router
-      // future={{
-      //   v7_startTransition: true,
-      //   v7_relativeSplatPath: true
-      // }}
-    >
-      <Header />
-
+    <Router>
+      <Header/>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contacto" element={<FormularioConSweetAlert />} />
-        <Route path="/carrito" element={<Carrito />} />
-        <Route path="/productos" element={<ProductosContainer />} />
-        <Route path="/productos/:id" element={<ProductoDetalle />} />
+        <Route path="/" element={<Home/>}/>
+        <Route path="/talleres" element={<Talleres/>} />
+        <Route path="/about" element={<About/>} />
+        <Route path="/contacto" element={<FormularioConSweetAlert/>} />
+        <Route path="/carrito" element={<Carrito/>} />
+        <Route path="/productos" element={<ProductosContainer/>} />
+        <Route path="/productos/:id" element={<ProductoDetalle/>} />
 
-        {/* Categorías */}
-        <Route path="/reutilizables" element={<Reutilizables />} />
-        <Route path="/biodegradables" element={<Biodegradables />} />
-        <Route path="/bolsasYlamparas" element={<BolsasYLamparas />} />
+        {/* Categorías*/}
+        <Route path="/reutilizables" element={<Reutilizables/>} />
+        <Route path="/biodegradables" element={<Biodegradables/>} />
+        <Route path="/bolsasYlamparas" element={<BolsasYLamparas/>} />
 
-        {/* Admin */}
-        <Route path="/admin/agregarProductos" element={<FormularioProducto />} />
-        <Route path="/admin/editarProducto/:id" element={<FormularioEdicion />} />
+        {/* Admin*/}
+        <Route path="/admin/agregarProductos" element={<FormularioProducto/>} />
+        <Route path="/admin/editarProducto/:id" element={<FormularioEdicion/>} />
 
-        {/* Usuarios */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/registrarse" element={<Registrarse />} />
-        <Route path="/admin/usuarios" element={<UsuariosContainerFirebase />} />
-        <Route path="/admin/usuarios/:id" element={<UsuarioDetalleFirebase />} />
-        <Route path="/admin/editarUsuario/:id" element={<FormularioEdicionUsuario />} />
+        {/* Usuarios*/}
+        <Route path="/login" element={<Login/>} />
+        <Route path="/registrarse" element={<Registrarse/>} />
+        <Route path="/admin/usuarios" element={<UsuariosContainerFirebase/>} />
+        <Route path="/admin/usuarios/:id" element={<UsuarioDetalleFirebase/>} />
+        <Route path="/admin/editarUsuario/:id" element={<FormularioEdicionUsuario/>} />
       </Routes>
 
-      <Footer />
-      <BotonWhatsApp />
+      <Footer/>
+      <BotonWhatsApp/>
     </Router>
   );
 }

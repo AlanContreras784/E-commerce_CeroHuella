@@ -1,0 +1,163 @@
+.talleres-pagina {
+  color: #283618;
+  padding-bottom: 3rem;
+}
+
+/* ---------- Portada ---------- */
+.talleres-portada {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: clamp(360px, 42vw, 560px);
+  padding: 2rem 1rem 2.5rem;
+  background: linear-gradient(135deg, #7cb744, #41bc73);
+  color: #fff;
+  overflow: hidden;
+}
+.talleres-portada--con-imagen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--portada);
+  background-size: cover;
+  background-position: 50% 25%;
+  filter: brightness(0.7);
+}
+
+/* Degradado oscuro abajo: el texto se lee sin tapar las caras */
+.talleres-portada--con-imagen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0) 65%);
+}
+
+
+.talleres-portada > * {
+  position: relative;
+  z-index: 1;
+}
+.talleres-portada h1 {
+  font-style: italic;
+  font-size: 2.2rem;
+}
+
+.talleres-portada p {
+  max-width: 40rem;
+  margin: 0.75rem auto 1.5rem;
+  font-size: 1.1rem;
+}
+
+.talleres-portada__acciones {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+/* ---------- Filtros ---------- */
+.talleres-filtros {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 2rem 0 1.5rem;
+}
+
+/* ---------- Tarjetas de talleres ---------- */
+.taller-card {
+  height: 100%;
+  border: 1px solid #7cb744fa;
+  box-shadow: 0 0.75rem 1.5rem rgba(10, 7, 7, 0.25);
+  overflow: hidden;
+  text-align: center;
+  color: #283618;
+}
+
+.taller-imagen {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+.taller-imagen--vacia {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #daeede, #b6e1d4);
+  color: #41704a;
+}
+
+.taller-card .card-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.taller-etiquetas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.35rem;
+  margin: 0.5rem 0 1rem;
+}
+
+.taller-etiqueta {
+  background-color: #283618;
+  color: #fff;
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+}
+
+/* ---------- Dónde y cómo ---------- */
+.talleres-info {
+  margin-top: 3rem;
+  padding: 1.5rem 1rem;
+  border: 1px solid #7cb744fa;
+  border-radius: 1rem;
+  background: #f3f8ec;
+}
+
+/* ---------- Comentarios ---------- */
+.talleres-comentarios h2,
+.talleres-tit {
+  font-style: italic;
+  font-size: 1.6rem;
+  margin: 3rem 0 1.5rem;
+}
+
+.comentario-card {
+  height: 100%;
+  border: 1px solid #7cb744fa;
+  border-radius: 1rem;
+  padding: 1.25rem;
+  background: #fff;
+  box-shadow: 0 0.5rem 1rem rgba(10, 7, 7, 0.15);
+}
+
+.comentario-card__comilla {
+  color: #7cb744;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.comentario-card footer {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.comentario-card footer span {
+  display: block;
+  opacity: 0.75;
+}
+
+.comentarios-vacio {
+  max-width: 36rem;
+  margin: 0 auto;
+  padding: 1.5rem;
+  border: 2px dashed #7cb744fa;
+  border-radius: 1rem;
+  background: #fff;
+}

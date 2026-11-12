@@ -1,15 +1,33 @@
 import { Container, Image, Row } from "react-bootstrap";
 import video from "../assets/video/ROCK&VIDARECICLA.mp4"
+import video1 from "../assets/video/jornadaSemanal.mp4"
 
 // Foto que se muestra solo en celular (menos de 768px), debajo de cada párrafo.
 // En pantallas más grandes las fotos siguen como antes (la de arriba a la derecha y la columna lateral).
-function FotoCelular({ src, alt }) {
+function FotoCelular({ src, alt , type}) {
+   // Detecta si es video por la prop 'type' o por la extensión del archivo
+  const isVideo =
+    type === "video" ||
+    (typeof src === "string" && /\.(mp4|webm|ogg|mov)$/i.test(src));
   return (
     <div className="d-md-none col-10 mx-auto pb-3">
-      <div className="card" style={{ border: "1px solid #7cb744fa" }}>
-        <Image src={src} className="card-img-top" alt={alt} />
+      <div className="card overflow-hidden" style={{ border: "1px solid #7cb744fa" }}>
+        {isVideo ? (
+          <video
+            src={src}
+            controls 
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-100 h-100 object-fit-cover object-position-top"
+            alt={alt}
+          />
+        ) : (
+          <Image src={src} className="card-img-top" alt={alt} />
+        )}
       </div>
-    </div>
+      </div>
   );
 }
 
@@ -26,11 +44,18 @@ export default function About() {
             controls
           ></video>
           </div>
-          <Image
+          {/* <Image
             src="https://i.postimg.cc/26YXphyP/imagennosotros.jpg"
             className="col-md-4 float-md-end mb-4 ms-md-5 d-none d-md-block"
             alt="..."
-          />
+          /> */}
+           <video src={video1}  controls 
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="col-md-4 float-md-end mb-4 ms-md-5 d-none d-md-block ">
+                  </video> 
 
           <h2 className="pb-3 px-3">¿Quiénes Somos?</h2>
           <p className="p-3">
@@ -50,7 +75,7 @@ export default function About() {
             Creemos que el reciclaje y el uso de productos que contaminen menos
             son pasos fundamentales hacia un futuro más limpio y saludable.
           </p>
-          <FotoCelular src="https://i.postimg.cc/XqRj3s5V/campa-a-De-Residuos.jpg" alt="Campaña de residuos" />
+          <FotoCelular src={video1} type="video" />
 
           <h2 className="p-3">Nuestros Valores</h2>
           <p className="p-3">
@@ -86,15 +111,12 @@ export default function About() {
               </div>
             </div>
             <div className=" col-10 col-md-6 col-lg-12">
-              <div className="card">
+              <div > 
+                  
                 <Image src="https://i.postimg.cc/W481rmBn/bolsas-De-Dormir.jpg" className="card-img-top " alt="..."/>
               </div>
             </div>
-            {/* <div className="col-10 col-md-6 col-lg-12">
-              <div className="card">
-                <Image src="https://i.postimg.cc/cHD6q7TH/amemos-sin-juzgar.jpg" className="card-img-top" alt="..."/>
-              </div>
-            </div> */}
+           
             <div className="col-10 col-md-6 col-lg-12">
               <div className="card">
                 <Image src="https://i.postimg.cc/GmJLwJmC/mes-Del-Reciclaje.jpg" className="card-img-top" alt="..."/>

@@ -93,6 +93,7 @@ function Header() {
                             <Nav.Link href="#" eventKey={'/'} as={Link} to={'/'} className='nav-link me-auto'>Home</Nav.Link>
                             {/* <Nav.Link href="#" eventKey={'/productos'} as={Link} to={'/productos'} className='nav-link'>Productos</Nav.Link> */}
                             <Nav.Link href="#" eventKey={'/about'} as={Link} to={'/about'} className='nav-link  me-auto'>Nosotros</Nav.Link>
+                            <Nav.Link href="#" eventKey={'/talleres'} as={Link} to={'/talleres'} className='nav-link  me-auto'>Talleres</Nav.Link>
                             <NavDropdown title="Productos" id="nav-dropdown" className=" me-auto">
                                 <NavDropdown.Item  eventKey="/reutilizables" as={Link} to={'/reutilizables'}>Reutilizables</NavDropdown.Item>
                                 <NavDropdown.Item eventKey="/biodegradables" as={Link} to={'/biodegradables'}>Biodegradables</NavDropdown.Item>
