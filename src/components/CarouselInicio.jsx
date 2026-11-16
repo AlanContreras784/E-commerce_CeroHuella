@@ -1,16 +1,17 @@
 import Carousel from 'react-bootstrap/Carousel';
 import imagen1 from '../assets/img/plantas_1920.jpg'
-import imagen2 from '../assets/img/equipo1.webp';
+import imagen2 from '../assets/img/equipoMejorado2.jpg';
 import imagen3 from '../assets/img/carousel_03.jpg';
 import imagenRyV from '../assets/img/R&V Logo Verde 1024(2).png'
 import '../styles/Carousel.css'
+import "../styles/Talleres.css";
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 
 function CarouselInicio() {
   return (
     <Carousel className=''>
-      <Carousel.Item>
+      <Carousel.Item className=" taller-imagen--vacia ">
         <img src={imagen1}/>
         <Carousel.Caption className='bottom-10'>
           <h1 className="text-center mx-auto">UN COMPROMISO CON EL PLANETA</h1>
@@ -31,8 +32,16 @@ function CarouselInicio() {
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
-        <img alt='"Equipo de Cero Huella trabajando en una jornada' src={imagen2} className="w-100 h-90" style={{ backgroundSize: 'cover', backgroundPosition: 'top ', objectPosition: "50% 20%", backgroundPosition: "bottom",objectPosition: "50% 90%" }}/>
-        <Carousel.Caption className=''>
+        <img 
+          // alt="Equipo de Cero Huella trabajando en una jornada"
+          // src={imagen2}
+          // className="d-block w-100 object-fit-cover"
+          // style={{ objectPosition: "50% 90%" ,backgroundPosition: "top", objectPosition: "50% 20%" }}
+          alt="Equipo de Cero Huella trabajando en una jornada"
+          src={imagen2}
+          className='imagen-portada  w-100'
+        />
+        <Carousel.Caption className='caption-portada'>
           <h3>Un equipo que se une por el ambiente</h3>
           <p>Personas comprometidas que trabajan codo a codo para cuidar el planeta y a nuestra comunidad.</p>
         </Carousel.Caption>

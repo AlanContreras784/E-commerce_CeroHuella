@@ -1,0 +1,30 @@
+/* ---------- Videos grabados en vertical (9:16) ---------- */
+
+/* Video centrado: los dos de la página y el de las tarjetas del celular */
+.video-vertical {
+  display: block;
+  margin: 0 auto;
+  width: auto;                 /* toma su ancho real... */
+  max-width: 100%;             /* ...pero nunca más ancho que su contenedor */
+  max-height: 70vh;            /* nunca más alto que el 80% de la pantalla */
+  max-height: 70svh;           /* igual, pero descontando la barra del navegador en celulares */
+  aspect-ratio: auto 9 / 16;   /* reserva el espacio antes de que cargue, para que la página no salte */
+  background: #000;
+}
+
+/* En celular se deja más aire arriba y abajo para ver también el texto */
+@media (max-width: 767px) {
+  .video-vertical {
+    max-height: 70vh;
+    max-height: 70svh;
+  }
+}
+
+/* En compu: más ancho, sin tope de altura */
+@media (min-width: 992px) {
+  .video-vertical {
+    width: 100%;
+    max-width: 320px;          /* ancho máximo de cada video: subilo o bajalo a gusto */
+    max-height: none;          /* se saca el tope de altura (la página se scrollea) */
+  }
+}
