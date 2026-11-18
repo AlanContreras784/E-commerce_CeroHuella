@@ -1,0 +1,247 @@
+/* ---------- Página de detalle de producto ---------- */
+.pd-pagina {
+  background-color: #d3d1d1;
+  padding: 1.5rem 1rem 3rem;
+}
+
+.pd-contenedor {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.pd-volver {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  color: #283618;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.pd-volver:hover {
+  text-decoration: underline;
+}
+
+.pd-card {
+  display: grid;
+  grid-template-columns: 1fr;
+  background: #fff;
+  border: 1px solid #7cb744e0;
+  border-radius: 1.25rem;
+  box-shadow: 0 2rem 4rem rgba(10, 7, 7, 0.45);
+  overflow: hidden;
+  color: #283618;
+}
+
+@media (min-width: 768px) {
+  .pd-card {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ---------- Imagen y minigalería ---------- */
+.pd-imagen-wrap {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background: #f4f7ef;
+}
+
+.pd-galeria {
+  width: 100%;
+}
+
+/* Marco de tamaño fijo: así la página no "salta" cuando las fotos tienen distinta forma */
+.pd-galeria__marco {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 4 / 5;
+  max-height: 520px;
+  margin: 0 auto;
+}
+
+.pd-imagen {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;      /* se ve la imagen completa, sin recortes */
+  border-radius: 0.75rem;
+}
+
+.pd-imagen--vacia {
+  background: #e4ebd9;
+}
+
+.pd-badge-oferta {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 1;
+  background: #c1121f;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+}
+
+.pd-galeria__flecha {
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(40, 54, 24, 0.75);
+  color: #fff;
+  cursor: pointer;
+}
+
+.pd-galeria__flecha:hover {
+  background: #283618;
+}
+
+.pd-galeria__flecha--izq {
+  left: 0.25rem;
+}
+
+.pd-galeria__flecha--der {
+  right: 0.25rem;
+}
+
+.pd-galeria__puntos {
+  display: flex;
+  justify-content: center;
+  gap: 0.15rem;
+  margin-top: 0.5rem;
+}
+
+/* Cada puntito tiene un área de toque más grande que lo que se ve */
+.pd-galeria__punto {
+  box-sizing: content-box;
+  width: 0.55rem;
+  height: 0.55rem;
+  padding: 0.4rem 0.2rem;
+  border: 0;
+  border-radius: 999px;
+  background: #b7c4a6;
+  background-clip: content-box;
+  cursor: pointer;
+  transition: width 0.2s ease, background-color 0.2s ease;
+}
+
+.pd-galeria__punto--activo {
+  width: 1.6rem;
+  background-color: #283618;
+}
+
+/* ---------- Información ---------- */
+.pd-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+  text-align: left;
+}
+
+.pd-categoria {
+  align-self: flex-start;
+  background: #eaf3df;
+  padding: 0.15rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  text-transform: capitalize;
+}
+
+.pd-nombre {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.pd-precio {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+
+.pd-precio-actual {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+/* ---------- Colores ---------- */
+.pd-colores-titulo {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.pd-swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.5rem;
+}
+
+.pd-swatch {
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.pd-swatch--activo {
+  box-shadow: 0 0 0 2px #fff, 0 0 0 4px #283618;
+}
+
+/* Color sin código conocido: botón con el nombre */
+.pd-color-texto {
+  padding: 0.15rem 0.8rem;
+  border: 1px solid #283618;
+  border-radius: 999px;
+  background: #fff;
+  color: #283618;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.pd-color-texto--activo {
+  background: #283618;
+  color: #fff;
+}
+
+/* ---------- Acordeón de descripción ---------- */
+.pd-acordeon {
+  --bs-accordion-border-color: #dfe6d3;
+  --bs-accordion-btn-bg: #f6f8f2;
+  --bs-accordion-active-bg: #f6f8f2;
+  --bs-accordion-active-color: #283618;
+  --bs-accordion-btn-color: #283618;
+  --bs-accordion-btn-focus-box-shadow: 0 0 0 0.2rem rgba(124, 183, 68, 0.35);
+}
+
+.pd-acordeon .accordion-item {
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+/* ---------- Botón principal ---------- */
+.pd-cta {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}

@@ -21,7 +21,7 @@
   inset: 0;
   background-image: var(--portada);
   background-size: cover;
-  background-position: 50% 25%;
+  background-position: 50% 60%;
   filter: brightness(0.7);
 }
 

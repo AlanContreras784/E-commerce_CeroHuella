@@ -14,7 +14,7 @@ export const CONTACTO_TALLERES = {
 
 // Foto grande de la parte de arriba (opcional). Pegá un "Enlace directo" de Postimages.
 // Si queda vacío, se muestra solo el fondo verde.
-export const IMAGEN_PORTADA = "https://i.postimg.cc/fRDDqHnT/equipo2.webp";
+export const IMAGEN_PORTADA = "https://i.postimg.cc/xdKggKwm/Whats-App-Image-2026-11-17-at-11-30-46-AM.jpg";
 
 // Categorías para los filtros. El "id" tiene que coincidir con el de cada taller.
 export const CATEGORIAS_TALLERES = [

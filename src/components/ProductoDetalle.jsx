@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import "../styles/ProductoDetalle.css";
+import { Accordion, Button } from "react-bootstrap";
+import "../styles/DetalleProducto.css";
 import "../styles/BtnWhatsApp.css";
 import { dispararSweetAlertBasico, dispararSweetAlertTrueFalse } from "../assets/SweetAlert";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -9,11 +10,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // import { ToastContainer, toast } from "react-toastify";
 // import { MdOutlineAddShoppingCart } from "react-icons/md";
 // -----------------------------------------------------------------------------
-import { Button } from "react-bootstrap";
 import { useAuthContext } from "../contexts/AuthContext";
 import { useProductosContext } from "../contexts/ProductosContext";
 import { FaRegEdit, FaRegTrashAlt, FaWhatsapp } from "react-icons/fa";
 import { descuentoDe, esOferta, precioFinal } from "../utils/precios";
+import { parseColores } from "../utils/colores";
+import { listaImagenes } from "../utils/imagenes";
+import GaleriaProducto from "./GaleriaProducto";
 import { mensajeConsultaProducto, urlWhatsApp } from "../config/contacto";
 
 function ProductoDetalle() {
@@ -24,7 +27,15 @@ function ProductoDetalle() {
   // const [cantidad, setCantidad] = useState(1); // CARRITO
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
+  const [indiceColor, setIndiceColor] = useState(0);
   const navigate = useNavigate();
+
+  // Colores del producto (campo "colores", ver src/utils/colores.js)
+  const colores = useMemo(
+    () => parseColores(productoSeleccionado?.colores),
+    [productoSeleccionado]
+  );
+  const colorElegido = colores[indiceColor] ?? colores[0];
 
   // Cargar producto al montar el componente
   useEffect(() => {
@@ -64,7 +75,7 @@ function ProductoDetalle() {
   /*
   function funcionCarrito() {
     if (cantidad < 1) return;
-    agregarAlCarrito({ ...productoSeleccionado, price: precioFinal(productoSeleccionado), cantidad });
+    agregarAlCarrito({ ...productoSeleccionado, price: precioFinal(productoSeleccionado), color: colorElegido?.nombre, cantidad });
     dispararSweetAlertBasico("Producto Agregado", "El producto fue agregado al carrito con éxito", "success", "Cerrar");
     toast.success('Agregado al carrito con éxito');
   }
@@ -77,85 +88,146 @@ function ProductoDetalle() {
   if (error) return <p>{error}</p>;
   if (!productoSeleccionado?.id) return <p>Producto no encontrado</p>;
 
-  return (
-    <div className="div-detalle py-4">
-      <h1 className="fst-italic fs-3 mb-4">DETALLES DEL PRODUCTO</h1>
-      <div className="detalle-container">
-        <img
-          className="detalle-imagen mx-auto mb-3"
-          src={productoSeleccionado.imagen}
-          alt={productoSeleccionado.name}
-        />
-        <div className="detalle-info">
-          <h1 className="fs-2">{productoSeleccionado.name}</h1>
-          <p>{productoSeleccionado.description}</p>
-          {esOferta(productoSeleccionado) ? (
-            <h6>
-              <span className="precio-original">$ {productoSeleccionado.price}</span>{" "}
-              <span className="precio-oferta">$ {precioFinal(productoSeleccionado)}</span>{" "}
-              <span className="badge bg-danger">-{descuentoDe(productoSeleccionado)}%</span>
-            </h6>
-          ) : (
-            <h6>$ {productoSeleccionado.price}</h6>
-          )}
+  const oferta = esOferta(productoSeleccionado);
 
-          {admin ? (
-            <div className="d-flex justify-content-center align-items-center">
-              <Link title="Editar Producto" to={`/admin/editarProducto/${id}`}>
-                <Button className="mx-1 mb-2" variant="outline-primary">
-                  <FaRegEdit size={24} />
-                </Button>
-              </Link>
-              <Button
-                title="Eliminar Producto"
-                className="mx-1 mb-2"
-                variant="outline-danger"
-                onClick={dispararEliminar}
-              >
-                <FaRegTrashAlt size={20} />
-              </Button>
-              <Link to="/productos">
-                <Button className="mx-1 mb-2" variant="outline-success">Ir a Productos</Button>
-              </Link>
+  // El color elegido viaja en el mensaje de WhatsApp, junto al nombre del producto
+  const productoConsulta = colorElegido
+    ? { ...productoSeleccionado, name: `${productoSeleccionado.name} · Color: ${colorElegido.nombre}` }
+    : productoSeleccionado;
+
+  return (
+    <div className="pd-pagina">
+      <div className="pd-contenedor">
+        <Link className="pd-volver" to="/productos">← Volver a productos</Link>
+
+        <article className="pd-card">
+          {/* ---------- Imagen ---------- */}
+          <div className="pd-imagen-wrap">
+            <GaleriaProducto
+              key={productoSeleccionado.id}
+              imagenes={listaImagenes(productoSeleccionado)}
+              alt={productoSeleccionado.name}
+            >
+              {oferta && <span className="pd-badge-oferta">-{descuentoDe(productoSeleccionado)}%</span>}
+            </GaleriaProducto>
+          </div>
+
+          {/* ---------- Información ---------- */}
+          <div className="pd-info">
+            {productoSeleccionado.category && (
+              <span className="pd-categoria">{productoSeleccionado.category}</span>
+            )}
+
+            <h1 className="pd-nombre">{productoSeleccionado.name}</h1>
+
+            <div className="pd-precio">
+              <span className="pd-precio-actual">$ {precioFinal(productoSeleccionado)}</span>
+              {oferta && (
+                <>
+                  <span className="precio-original">$ {productoSeleccionado.price}</span>
+                  <span className="badge bg-danger">-{descuentoDe(productoSeleccionado)}%</span>
+                </>
+              )}
             </div>
-          ) : (
-            <div>
-              {/* --- CARRITO (desactivado por ahora) ---
-              <div className="d-flex align-items-center mb-2">
-                <button className="me-3 btn btn-light" onClick={restarContador}>-</button>
-                <span>{cantidad}</span>
-                <button className="ms-3 btn btn-light" onClick={sumarContador}>+</button>
+
+            {/* ---------- Colores ---------- */}
+            {colores.length > 0 && (
+              <div>
+                <p className="pd-colores-titulo">
+                  Color: <strong>{colorElegido?.nombre}</strong>
+                </p>
+                <div className="pd-swatches" role="group" aria-label="Elegir color">
+                  {colores.map((color, indice) => {
+                    const activo = color === colorElegido;
+                    return color.hex ? (
+                      <button
+                        key={`${color.nombre}-${indice}`}
+                        type="button"
+                        className={`pd-swatch ${activo ? "pd-swatch--activo" : ""}`}
+                        style={{ backgroundColor: color.hex }}
+                        title={color.nombre}
+                        aria-label={color.nombre}
+                        aria-pressed={activo}
+                        onClick={() => setIndiceColor(indice)}
+                      />
+                    ) : (
+                      <button
+                        key={`${color.nombre}-${indice}`}
+                        type="button"
+                        className={`pd-color-texto ${activo ? "pd-color-texto--activo" : ""}`}
+                        aria-pressed={activo}
+                        onClick={() => setIndiceColor(indice)}
+                      >
+                        {color.nombre}
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
-              */}
-              <div className="d-flex flex-wrap justify-content-center align-items-center">
-                {/* --- CARRITO (desactivado por ahora)
+            )}
+
+            {/* ---------- Descripción ---------- */}
+            {productoSeleccionado.description && (
+              <Accordion defaultActiveKey="0" className="pd-acordeon">
+                <Accordion.Item eventKey="0">
+                  <Accordion.Header>Descripción</Accordion.Header>
+                  <Accordion.Body>{productoSeleccionado.description}</Accordion.Body>
+                </Accordion.Item>
+              </Accordion>
+            )}
+
+            {/* ---------- Acciones ---------- */}
+            {admin ? (
+              <div className="d-flex flex-wrap justify-content-start align-items-center">
+                <Link title="Editar Producto" to={`/admin/editarProducto/${id}`}>
+                  <Button className="me-2 mb-2" variant="outline-primary">
+                    <FaRegEdit size={24} />
+                  </Button>
+                </Link>
+                <Button
+                  title="Eliminar Producto"
+                  className="me-2 mb-2"
+                  variant="outline-danger"
+                  onClick={dispararEliminar}
+                >
+                  <FaRegTrashAlt size={20} />
+                </Button>
+                <Link to="/productos">
+                  <Button className="mb-2" variant="outline-success">Ir a Productos</Button>
+                </Link>
+              </div>
+            ) : (
+              <div>
+                {/* --- CARRITO (desactivado por ahora) ---
+                <div className="d-flex align-items-center mb-2">
+                  <button className="me-3 btn btn-light" onClick={restarContador}>-</button>
+                  <span>{cantidad}</span>
+                  <button className="ms-3 btn btn-light" onClick={sumarContador}>+</button>
+                </div>
                 <Button
                   title="Agregar al carrito"
-                  className="mx-1 mb-2"
+                  className="pd-cta mb-2"
                   variant="outline-primary"
                   onClick={funcionCarrito}
                 >
-                  <MdOutlineAddShoppingCart size={24} />
+                  <MdOutlineAddShoppingCart size={24} /> Agregar al carrito
                 </Button>
                 <ToastContainer />
                 */}
                 <Button
                   as="a"
                   variant=""
-                  className="btn-whatsapp mx-1 mb-2 d-inline-flex align-items-center gap-2"
-                  href={urlWhatsApp(mensajeConsultaProducto(productoSeleccionado))}
+                  className="btn-whatsapp pd-cta d-flex align-items-center justify-content-center gap-2"
+                  href={urlWhatsApp(mensajeConsultaProducto(productoConsulta))}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <FaWhatsapp size={20} /> Consultar por WhatsApp
+                  <FaWhatsapp size={22} /> Consultar por WhatsApp
                 </Button>
-                <Link className="mx-1 mb-2" to="/productos">
-                  <Button variant="outline-success">Volver a Productos</Button>
-                </Link>
               </div>
-            </div>
-          )}
-        </div>
+            )}
+          </div>
+        </article>
       </div>
     </div>
   );

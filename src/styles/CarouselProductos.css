@@ -10,41 +10,116 @@
   margin-bottom: 1rem;
 }
 
-/* Deja lugar a los lados para las flechas */
-.carousel-productos {
-  padding: 0 3.5rem;
-}
-
-/* Pisa los estilos del carrusel de portada (70vh, imagen oscurecida) */
-.carousel-productos .carousel-item {
-  height: auto;
-  padding: 1rem 0 3rem;
-}
-
-.carousel-productos .producto-image {
-  width: 250px;
-  height: 300px;
-  object-fit: fill;
-  filter: none;
-}
-
-.carousel-productos__fila {
+/* ---------- Fila de productos (tarjetas de 250px, 3 a la vez en escritorio) ---------- */
+.slider-productos {
+  position: relative;
   display: flex;
   justify-content: center;
+  padding: 0 3.25rem;           /* lugar para las flechas */
+}
+
+.slider-productos__pista {
+  /* ancho = N tarjetas de 250px + los espacios entre ellas + el aire de los costados */
+  width: calc(var(--visibles) * 250px + (var(--visibles) - 1) * 2rem + 1rem);
+  max-width: 100%;
+  display: flex;
   gap: 2rem;
+  overflow-x: auto;
+  padding: 0.75rem 0.5rem 2rem; /* aire para que no se corten las sombras */
+  scroll-snap-type: x mandatory;
+  scroll-padding: 0 0.5rem;
+  scrollbar-width: none;        /* sin barra de desplazamiento */
 }
 
-.carousel-productos .carousel-control-prev,
-.carousel-productos .carousel-control-next {
-  width: 3rem;
+.slider-productos__pista::-webkit-scrollbar {
+  display: none;
 }
 
-.carousel-productos .carousel-indicators [data-bs-target] {
+.slider-productos__pista:focus-visible {
+  outline: 2px solid #7cb744;
+  outline-offset: 2px;
+}
+
+.slider-productos__item {
+  flex: 0 0 250px;
+  scroll-snap-align: start;
+}
+
+/* Las tarjetas de una misma fila quedan del mismo alto y con una sombra más suave */
+.slider-productos__item .producto-card {
+  height: 100%;
+  box-shadow: 0 0.5rem 1.25rem rgba(10, 7, 7, 0.35);
+}
+
+/* ---------- Flechas ---------- */
+.slider-productos__flecha {
+  position: absolute;
+  top: calc(50% - 1rem);
+  transform: translateY(-50%);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #283618;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.2s ease, opacity 0.2s ease;
+}
+
+.slider-productos__flecha:hover:not(:disabled) {
+  background: #7cb744;
+}
+
+.slider-productos__flecha:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.slider-productos__flecha--izq {
+  left: 0.25rem;
+}
+
+.slider-productos__flecha--der {
+  right: 0.25rem;
+}
+
+/* ---------- Puntitos ---------- */
+.slider-productos__puntos {
+  display: flex;
+  justify-content: center;
+  gap: 0.15rem;
+}
+
+.slider-productos__punto {
+  box-sizing: content-box;
+  width: 0.55rem;
+  height: 0.55rem;
+  padding: 0.4rem 0.2rem;       /* área de toque más grande que lo que se ve */
+  border: 0;
+  border-radius: 999px;
+  background: #9aa58a;
+  background-clip: content-box;
+  cursor: pointer;
+  transition: width 0.2s ease, background-color 0.2s ease;
+}
+
+.slider-productos__punto--activo {
+  width: 1.6rem;
   background-color: #283618;
 }
 
 @media (max-width: 575px) {
-  .carousel-productos {
-    padding: 0 2.5rem;
+  .slider-productos {
+    padding: 0 2.75rem;
+  }
+
+  .slider-productos__flecha {
+    width: 2.25rem;
+    height: 2.25rem;
   }
 }

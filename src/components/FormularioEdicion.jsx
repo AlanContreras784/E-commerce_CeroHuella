@@ -103,6 +103,12 @@ function FormularioEdicion() {
             </Form.Group>
 
             <Form.Group className="mb-3 text-start">
+              <FloatingLabel label="Más fotos (un enlace por línea)">
+                <Form.Control as="textarea" style={{ height: "110px" }} name="imagenes" value={producto.imagenes ?? ""} onChange={handleChange} />
+              </FloatingLabel>
+            </Form.Group>
+
+            <Form.Group className="mb-3 text-start">
               <FloatingLabel label="Precio">
                 <Form.Control
                   type="number"
@@ -156,6 +162,12 @@ function FormularioEdicion() {
                 checked={!!producto.destacado}
                 onChange={handleChange}
               />
+            </Form.Group>
+            <Form.Group className="mb-3 text-start">
+              <FloatingLabel label="Colores (separados por coma)">
+                <Form.Control type="text" name="colores" value={producto.colores ?? ""} onChange={handleChange} />
+              </FloatingLabel>
+              <Form.Text>Ej: Blanco, Negro, Verde agua:#7fd1b9</Form.Text>
             </Form.Group>
 
             <Form.Group className="mb-3 text-start">
